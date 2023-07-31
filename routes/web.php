@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SobreController;
+use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\PrincipalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +16,17 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
-Route::resource('employee', EmployeeController::class);
+Route::get('/', [PrincipalController::class, 'index'])->name('site.index');
+Route::get('contato', [ContatoController::class, 'index'])->name('site.contato');
+Route::get('sobre', [SobreController::class, 'index'])->name('site.sobre');
+Route::get('login', [PrincipalController::class, 'index'])->name('site.login');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('app')->group(function () {
+    Route::get('clientes', [PrincipalController::class, 'index'])->name('app.clientes');
+    Route::get('fornecedores', [PrincipalController::class, 'index'])->name('app.fornecedores');
+    Route::get('produtos', [PrincipalController::class, 'index'])->name('app.produtos');
 });
 
-Route::get('/sobre', function () {
-    return 'sobre';
-});
-
-Route::get('/contato', function () {
-    return 'contato';
+Route::fallback(function () {
+    echo "A rota acessada não existe. <a href='" . route('site.index') . "'>click aqui</a> para voltar para página inicial.";
 });
