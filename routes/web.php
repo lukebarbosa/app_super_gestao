@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\app\FornecedorController;
+use App\Http\Controllers\site\ContatoController;
+use App\Http\Controllers\site\PrincipalController;
+use App\Http\Controllers\site\SobreController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SobreController;
-use App\Http\Controllers\ContatoController;
-use App\Http\Controllers\PrincipalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +17,16 @@ use App\Http\Controllers\PrincipalController;
 |
 */
 
+
 Route::get('/', [PrincipalController::class, 'index'])->name('site.index');
 Route::get('contato', [ContatoController::class, 'index'])->name('site.contato');
+Route::resource('contato', ContatoController::class)->except('index');
 Route::get('sobre', [SobreController::class, 'index'])->name('site.sobre');
 Route::get('login', [PrincipalController::class, 'index'])->name('site.login');
 
 Route::prefix('app')->group(function () {
     Route::get('clientes', [PrincipalController::class, 'index'])->name('app.clientes');
-    Route::get('fornecedores', [PrincipalController::class, 'index'])->name('app.fornecedores');
+    Route::get('fornecedores', [FornecedorController::class, 'index'])->name('app.fornecedores');
     Route::get('produtos', [PrincipalController::class, 'index'])->name('app.produtos');
 });
 
