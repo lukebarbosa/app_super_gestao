@@ -4,8 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fornecedor extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    protected $table = 'fornecedores';
+
+    protected $fillable = [
+        'name',
+        'site',
+        'uf',
+        'email',
+    ];
+
+    protected $hidden = [
+        'created at',
+        'updated at',
+    ];
+
+
 }

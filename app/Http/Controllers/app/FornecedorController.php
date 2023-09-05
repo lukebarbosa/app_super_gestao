@@ -3,36 +3,16 @@
 namespace App\Http\Controllers\app;
 
 use App\Http\Controllers\Controller;
+use App\Models\Fornecedor;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
 {
     public function index()
     {
-        $fornecedores = [
-            0 => [
-                'nome' => 'Fornecedor 1',
-                'status' => 'N',
-                'cnpj' => '0',
-                'ddd' => '19', //São Paulo (SP)
-                'telefone' => '0000-0000'
-            ],
-            1 => [
-                'nome' => 'Fornecedor 2',
-                'status' => 'S',
-                'cnpj' => null,
-                'ddd' => '85', //Fortaleza (CE)
-                'telefone' => '0000-0000'
-            ],
-            2 => [
-                'nome' => 'Fornecedor 2',
-                'status' => 'S',
-                'cnpj' => null,
-                'ddd' => '32', //Juiz de fora (MG)
-                'telefone' => '0000-0000'
-            ]
-        ];
+        $fornecedores = Fornecedor::onlyTrashed()->get();
 
-        return view('app.fornecedores.index', compact('fornecedores'));
+        return $fornecedores;
+//        return view('app.fornecedores.index', compact('fornecedores'));
     }
 }
