@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('site_contatos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nome');
             $table->string('telefone');
             $table->string('email')->unique();
             $table->integer('motivo_contato');
