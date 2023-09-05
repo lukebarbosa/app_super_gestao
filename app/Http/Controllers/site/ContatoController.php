@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\site;
 
 use App\Http\Controllers\Controller;
+use App\Models\SiteContato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +16,6 @@ class ContatoController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $validator = Validator::make($request->all(), [
             'nome' => 'required|string',
             'telefone' => 'required|string',
@@ -25,11 +25,15 @@ class ContatoController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response(['error' => $validator->errors(), 'Validation Error']);
+            return response(['error' => $validator->errors()]);
         }
 
+        $contato = new SiteContato();
+        $contato->fill($request->all());
+        $contato->save();
+
         return response()->json([
-            'message' => 'User created successfully.',
-        ], 200);
+            'message' => 'Message send successfully.',
+        ], 201);
     }
 }

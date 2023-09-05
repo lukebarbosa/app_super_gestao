@@ -1,19 +1,19 @@
 <form action="{{ route('contato.store') }}" method="POST">
     @csrf
-    <input type="text" placeholder="Nome">
+    <input name="nome" type="text" placeholder="Nome">
     <br>
-    <input type="text" placeholder="Telefone">
+    <input name="telefone" type="text" placeholder="Telefone">
     <br>
-    <input type="text" placeholder="E-mail">
+    <input name="email" type="text" placeholder="E-mail">
     <br>
-    <select>
+    <select name="motivo_contato">
         <option value="">Qual o motivo do contato?</option>
-        <option value="">Dúvida</option>
-        <option value="">Elogio</option>
-        <option value="">Reclamação</option>
+        <option value="1">Dúvida</option>
+        <option value="2">Elogio</option>
+        <option value="3">Reclamação</option>
     </select>
     <br>
-    <textarea placeholder="Preencha aqui a sua mensagem"></textarea>
+    <textarea name="mensagem" placeholder="Preencha aqui a sua mensagem"></textarea>
     <br>
     <button type="submit" class="borda-preta">ENVIAR</button>
 </form>
